@@ -8,14 +8,15 @@ const URL_USER = {
 }
 
 const URL_ADMIN = {
-  users: 'admin/',
+  users: '/users',
 }
 
 const APP_URL = {
   ...URL_PUBLIC,
   ...URL_USER,
   ...URL_ADMIN,
-  login: '/login'
+  login: '/login',
+  signUp: '/sign-up',
 }
 
 module.exports = {

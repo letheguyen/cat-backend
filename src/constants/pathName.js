@@ -17,6 +17,7 @@ const APP_URL = {
   ...URL_ADMIN,
   login: '/login',
   signUp: '/sign-up',
+  upload: '/upload',
 }
 
 module.exports = {

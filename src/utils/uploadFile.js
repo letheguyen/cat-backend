@@ -1,12 +1,13 @@
 const multer = require('multer')
 const path = require('path')
+const fs = require('fs')
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/')
+    cb(null, process.env.FOLDER_PUBLIC)
   },
 
-  filename: function (req, file, cb) {
+  filename: function (_, file, cb) {
     cb(
       null,
       file.fieldname + '-' + Date.now() + path.extname(file.originalname)
@@ -22,7 +23,17 @@ const checkTypeFile = function (req, file, cb) {
   cb(null, true)
 }
 
-module.exports = {
+const uploadSingle = multer({
   storage,
-  checkTypeFile
+  fileFilter: checkTypeFile,
+}).single('file')
+
+const handleDeleteFile = (fileName) => {
+  const arrayImage = fileName.split('/')
+  fs.rmSync(process.env.FOLDER_PUBLIC + arrayImage[arrayImage.length - 1])
+}
+
+module.exports = {
+  uploadSingle,
+  handleDeleteFile
 }

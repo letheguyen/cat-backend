@@ -15,7 +15,7 @@ const APP_URL = {
   ...URL_PUBLIC,
   ...URL_USER,
   ...URL_ADMIN,
-  login: '/login',
+  login: '/sign-in',
   signUp: '/sign-up',
   upload: '/upload',
 }

@@ -1,12 +1,18 @@
-const { handleCreateToken, verifyToken } = require('../utils')
+const { handleCreateToken } = require('../utils')
 const Users = require('../models/users')
 
 const SignIn = async (req, res) => {
   try {
-    const userLogin = await Users.findOne({
-      email: req.body.email,
-      password: req?.body?.password,
-    })
+    const data = req.body
+    const userLogin = await Users.findOne(
+      {
+        email: data.email,
+        password: data.password,
+      },
+      {
+        password: false,
+      }
+    )
 
     if (userLogin) {
       const token = handleCreateToken({
@@ -19,7 +25,7 @@ const SignIn = async (req, res) => {
 
     return res.status(400).json({ message: 'Incorrect account information' })
   } catch (err) {
-    return res.status(500).json({ message: 'Internal server error' })
+    return res.status(500).json({ message: 'Internal server error', err })
   }
 }
 

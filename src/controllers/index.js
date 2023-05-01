@@ -7,5 +7,5 @@ module.exports = {
   ...usersController,
   ...SignInController,
   ...SignUpController,
-  uploadFile,
+  ...uploadFile,
 }

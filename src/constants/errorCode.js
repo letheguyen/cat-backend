@@ -1,6 +1,6 @@
 const ERROR_CODE = {
-  ACCOUNT_EXISTS: {
-    message: 'Account already exists',
+  EXISTS: {
+    message: 'Already exists',
     errorCode: 1
   },
   CREATE_SUCCESS: {
@@ -9,7 +9,7 @@ const ERROR_CODE = {
   },
   ERROR_SERVER: {
     errorCode: 9999
-  }
+  },
 }
 
 module.exports = {

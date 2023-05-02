@@ -9,6 +9,7 @@ const URL_USER = {
 
 const URL_ADMIN = {
   users: '/users',
+  createCategory: '/create-category'
 }
 
 const APP_URL = {

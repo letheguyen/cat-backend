@@ -1,13 +1,20 @@
-const multer = require('multer')
-const path = require('path')
 const fs = require('fs')
+const path = require('path')
+const multer = require('multer')
+const { verifyToken } = require('./jwt')
+const { ADMIN_ROLE } = require('../constants')
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, process.env.FOLDER_PUBLIC)
+    const isAccess = verifyToken(req, ADMIN_ROLE)
+    if (isAccess) {
+      cb(null, process.env.FOLDER_PUBLIC)
+    } else {
+      return cb('Not have access', false)
+    }
   },
 
-  filename: function (_, file, cb) {
+  filename: function (req, file, cb) {
     cb(
       null,
       file.fieldname + '-' + Date.now() + path.extname(file.originalname)
@@ -35,5 +42,5 @@ const handleDeleteFile = (fileName) => {
 
 module.exports = {
   uploadSingle,
-  handleDeleteFile
+  handleDeleteFile,
 }

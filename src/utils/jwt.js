@@ -5,7 +5,8 @@ const handleCreateToken = (data) => {
 }
 
 const verifyToken = (req, role) => {
-  const token = req?.headers?.authorization.replace('Bearer ', '')
+  const token = req?.headers?.authorization?.replace('Bearer ', '')
+  if(!token) return null
   return jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
     if (err) return null
     if (!role) return decoded

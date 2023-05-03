@@ -10,6 +10,7 @@ const URL_USER = {
 const URL_ADMIN = {
   users: '/users',
   categorys: '/categorys',
+  categorysDetail: '/categorys/:id',
 }
 
 const APP_URL = {

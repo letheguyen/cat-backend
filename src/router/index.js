@@ -10,7 +10,8 @@ const {
   uploadFile,
   createCategory,
   getCategorys,
-  deleteCategory
+  getCategoryDetail,
+  deleteCategory,
 } = require('../controllers')
 
 // App
@@ -21,8 +22,8 @@ router.post(APP_URL.upload, uploadSingle, uploadFile)
 // Admin
 router.get(APP_URL.users, getUsers)
 router.get(APP_URL.categorys, getCategorys)
+router.get(APP_URL.categorysDetail, getCategoryDetail)
 router.post(APP_URL.categorys, createCategory)
-router.delete(`${APP_URL.categorys}/:id`, deleteCategory)
-
+router.delete(APP_URL.categorysDetail, deleteCategory)
 
 module.exports = router

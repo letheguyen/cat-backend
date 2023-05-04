@@ -7,6 +7,10 @@ const ERROR_CODE = {
     message: 'Create success',
     errorCode: 2
   },
+  NO_DATA: {
+    message: 'Not found',
+    errorCode: 3
+  },
   ERROR_SERVER: {
     errorCode: 9999
   },

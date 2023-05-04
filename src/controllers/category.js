@@ -56,6 +56,22 @@ const getCategorys = async (req, res) => {
   }
 }
 
+const getCategoryDetail = async (req, res) => {
+  try {
+    const dataDetailCategory = await Categorys.findById(req.params.id)
+
+    if (dataDetailCategory) {
+      return res.status(200).json(dataDetailCategory)
+    }
+    return res.status(400).json(ERROR_CODE.NO_DATA)
+  } catch (err) {
+    return res.status(500).json({
+      message: err?.message,
+      errorCode: ERROR_CODE.ERROR_SERVER.errorCode,
+    })
+  }
+}
+
 const deleteCategory = async (req, res) => {
   try {
     const dataDelete = await Categorys.findByIdAndDelete(req.params.id)
@@ -78,4 +94,5 @@ module.exports = {
   createCategory,
   getCategorys,
   deleteCategory,
+  getCategoryDetail,
 }

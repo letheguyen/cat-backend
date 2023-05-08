@@ -18,12 +18,10 @@ const signUp = async (req, res) => {
     await Users.create(dataBoy)
     return res.status(200).json(ERROR_CODE.CREATE_SUCCESS)
   } catch (err) {
-    return res
-      .status(500)
-      .json({
-        message: err?.message,
-        errorCode: ERROR_CODE.ERROR_SERVER.errorCode,
-      })
+    return res.status(500).json({
+      message: err?.message,
+      errorCode: ERROR_CODE.ERROR_SERVER.errorCode,
+    })
   }
 }
 

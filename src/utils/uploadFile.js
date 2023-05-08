@@ -1,12 +1,12 @@
 const fs = require('fs')
 const path = require('path')
 const multer = require('multer')
-const { verifyToken } = require('./jwt')
-const { ADMIN_ROLE } = require('../constants')
+const { handleCheckUrlRequest } = require('./checkUrlRequest,')
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const isAccess = verifyToken(req, ADMIN_ROLE)
+    const isAccess = handleCheckUrlRequest(req)
+    
     if (isAccess) {
       cb(null, process.env.FOLDER_PUBLIC)
     } else {

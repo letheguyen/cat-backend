@@ -90,9 +90,38 @@ const deleteCategory = async (req, res) => {
   }
 }
 
+const updateCategory = async (req, res) => {
+  try {
+    const oldCategory = await Categorys.findById(req.params.id)
+
+    const newCategory = await Categorys.findByIdAndUpdate(
+      req.params.id,
+      req.body
+    )
+
+    if (newCategory) {
+      if (oldCategory.background !== req.body?.background) {
+        handleDeleteFile(oldCategory.background)
+      }
+      if (oldCategory.avatar !== req.body?.avatar) {
+        handleDeleteFile(oldCategory.avatar)
+      }
+      return res.status(200).json(ERROR_CODE.CREATE_SUCCESS)
+    }
+
+    return res.status(400).json(ERROR_CODE.ACTION_FAILURE)
+  } catch (err) {
+    return res.status(500).json({
+      message: err?.message,
+      errorCode: ERROR_CODE.ERROR_SERVER.errorCode,
+    })
+  }
+}
+
 module.exports = {
   createCategory,
   getCategorys,
   deleteCategory,
   getCategoryDetail,
+  updateCategory,
 }

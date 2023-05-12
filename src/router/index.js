@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const { APP_URL } = require('../constants')
 
-const { uploadSingle } = require('../utils')
 const {
   getUsers,
   SignIn,
@@ -12,7 +11,9 @@ const {
   getCategorys,
   getCategoryDetail,
   deleteCategory,
+  updateCategory
 } = require('../controllers')
+const { uploadSingle } = require('../utils')
 
 // App
 router.post(APP_URL.login, SignIn)
@@ -25,5 +26,7 @@ router.get(APP_URL.categorys, getCategorys)
 router.get(APP_URL.categorysDetail, getCategoryDetail)
 router.post(APP_URL.categorys, createCategory)
 router.delete(APP_URL.categorysDetail, deleteCategory)
+router.put(APP_URL.categorysDetail, updateCategory)
+
 
 module.exports = router

@@ -11,6 +11,14 @@ const ERROR_CODE = {
     message: 'Not found',
     errorCode: 3
   },
+  UPDATE_SUCCESS: {
+    message: 'Update success',
+    errorCode: 4
+  },
+  ACTION_FAILURE: {
+    message: 'Failure',
+    errorCode: 5
+  },
   ERROR_SERVER: {
     errorCode: 9999
   },

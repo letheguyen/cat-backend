@@ -92,7 +92,26 @@ const deleteCategory = async (req, res) => {
 
 const updateCategory = async (req, res) => {
   try {
+    const dataBoy = req.body
     const oldCategory = await Categorys.findById(req.params.id)
+
+    const handleClearImage = () => {
+      if (oldCategory.background !== req.body?.background) {
+        handleDeleteFile(oldCategory.background)
+      }
+      if (oldCategory.avatar !== req.body?.avatar) {
+        handleDeleteFile(oldCategory.avatar)
+      }
+    }
+
+    const isExists = await Categorys.findOne({
+      title: dataBoy?.title,
+    })
+
+    if (isExists) {
+      handleClearImage()
+      return res.status(400).json(ERROR_CODE.EXISTS)
+    }
 
     const newCategory = await Categorys.findByIdAndUpdate(
       req.params.id,
@@ -100,12 +119,7 @@ const updateCategory = async (req, res) => {
     )
 
     if (newCategory) {
-      if (oldCategory.background !== req.body?.background) {
-        handleDeleteFile(oldCategory.background)
-      }
-      if (oldCategory.avatar !== req.body?.avatar) {
-        handleDeleteFile(oldCategory.avatar)
-      }
+      handleClearImage()
       return res.status(200).json(ERROR_CODE.CREATE_SUCCESS)
     }
 

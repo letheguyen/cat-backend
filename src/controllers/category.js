@@ -1,7 +1,7 @@
 const Categorys = require('../models/categorys')
 
 const { handleDeleteFile } = require('../utils')
-const { ERROR_CODE, DEFAULT_LIMIT, DEFAULT_PAGE_SIZE } = require('../constants')
+const { ERROR_CODE } = require('../constants')
 
 const createCategory = async (req, res) => {
   try {
@@ -28,17 +28,23 @@ const createCategory = async (req, res) => {
 
 const getCategorys = async (req, res) => {
   try {
-    const { page = DEFAULT_PAGE_SIZE, limit = DEFAULT_LIMIT } = req.query
+    const { page, limit } = req.query
+    let categorys
 
     const lengthCategory = await Categorys.find({}, { title: true })
-    const categorys = await Categorys.find(
-      {},
-      {
-        __v: false,
-      }
-    )
-      .skip((Number(page) - 1) * Number(limit))
-      .limit(limit)
+
+    if ( page && limit) {
+      categorys = await Categorys.find(
+        {},
+        {
+          __v: false,
+        }
+      )
+        .skip((Number(page) - 1) * Number(limit))
+        .limit(limit)
+    } else {
+      categorys = await Categorys.find()
+    }
 
     return res.status(200).json({
       data: categorys,

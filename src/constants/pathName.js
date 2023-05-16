@@ -11,6 +11,7 @@ const URL_ADMIN = {
   users: '/users',
   categorys: '/categorys',
   categorysDetail: '/categorys/:id',
+  product: '/product'
 }
 
 const APP_URL = {

@@ -13,7 +13,8 @@ const {
   deleteCategory,
   updateCategory,
   createProduct,
-  getProducts
+  getProducts,
+  updateStatusCategory
 } = require('../controllers')
 const { uploadSingle } = require('../utils')
 
@@ -29,7 +30,11 @@ router.get(APP_URL.categorysDetail, getCategoryDetail)
 router.post(APP_URL.categorys, createCategory)
 router.delete(APP_URL.categorysDetail, deleteCategory)
 router.put(APP_URL.categorysDetail, updateCategory)
+
+router.patch(APP_URL.categorysDetail, updateStatusCategory)
+
 router.post(APP_URL.product, createProduct)
 router.get(APP_URL.product, getProducts)
+
 
 module.exports = router

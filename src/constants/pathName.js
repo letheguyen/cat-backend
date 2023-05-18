@@ -9,9 +9,9 @@ const URL_USER = {
 
 const URL_ADMIN = {
   users: '/users',
+  product: '/product',
   categorys: '/categorys',
   categorysDetail: '/categorys/:id',
-  product: '/product'
 }
 
 const APP_URL = {

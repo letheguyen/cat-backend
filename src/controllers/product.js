@@ -1,21 +1,28 @@
 const Product = require('../models/product')
+const Categorys = require('../models/categorys')
 
 const { handleDeleteFile } = require('../utils')
 const { ERROR_CODE } = require('../constants')
 
 const createProduct = async (req, res) => {
   try {
-    const dataBoy = req.body
-    const dataProduct = await Product.create(dataBoy)
+    const dataBody = req.body
+    const dataProduct = await Product.create(dataBody)
 
     if (!dataProduct) {
-      dataBoy?.images?.map((image) => {
+      dataBody?.images?.map((image) => {
         if (image?.image) {
           handleDeleteFile(image.image)
         }
       })
       return res.status(400).json(ERROR_CODE.ACTION_FAILURE)
     }
+
+    await Categorys.findByIdAndUpdate(
+      dataBody.category,
+      { $inc: { productsCount: 1 }},
+      { new: true }
+    )
 
     return res.status(200).json(ERROR_CODE.CREATE_SUCCESS)
   } catch (err) {
@@ -30,7 +37,6 @@ const getProducts = async (req, res) => {
   try {
     const { page, limit } = req.query
     let product
-
     const lengthCategory = await Product.find({}, { title: true })
 
     if (page && limit) {
@@ -64,5 +70,5 @@ const getProducts = async (req, res) => {
 
 module.exports = {
   createProduct,
-  getProducts,
+  getProducts
 }

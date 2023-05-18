@@ -1,7 +1,8 @@
 const Categorys = require('../models/categorys')
+const Product = require('../models/product')
 
 const { handleDeleteFile } = require('../utils')
-const { ERROR_CODE } = require('../constants')
+const { ERROR_CODE, STATUS_CATEGORY } = require('../constants')
 
 const createCategory = async (req, res) => {
   try {
@@ -33,7 +34,7 @@ const getCategorys = async (req, res) => {
 
     const lengthCategory = await Categorys.find({}, { title: true })
 
-    if ( page && limit) {
+    if (page && limit) {
       categorys = await Categorys.find(
         {},
         {
@@ -81,11 +82,10 @@ const getCategoryDetail = async (req, res) => {
 const deleteCategory = async (req, res) => {
   try {
     const dataDelete = await Categorys.findByIdAndDelete(req.params.id)
+    await Product.deleteMany({ category: req.params.id })
 
-    if (dataDelete) {
-      if (dataDelete.background) handleDeleteFile(dataDelete.background)
-      if (dataDelete.avatar) handleDeleteFile(dataDelete.avatar)
-    }
+    if (dataDelete.background) handleDeleteFile(dataDelete.background)
+    if (dataDelete.avatar) handleDeleteFile(dataDelete.avatar)
 
     return res.status(200).json(ERROR_CODE.CREATE_SUCCESS)
   } catch (err) {
@@ -138,10 +138,28 @@ const updateCategory = async (req, res) => {
   }
 }
 
+const updateStatusCategory = async (req, res) => {
+  try {
+    await Categorys.updateOne(
+      { _id: req.params.id },
+      {
+        $set: { status: req.body.status },
+      }
+    )
+    return res.status(200).json(ERROR_CODE.UPDATE_SUCCESS)
+  } catch (err) {
+    return res.status(500).json({
+      message: err?.message,
+      errorCode: ERROR_CODE.ERROR_SERVER.errorCode,
+    })
+  }
+}
+
 module.exports = {
   createCategory,
   getCategorys,
   deleteCategory,
   getCategoryDetail,
   updateCategory,
+  updateStatusCategory,
 }

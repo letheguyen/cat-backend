@@ -18,7 +18,15 @@ const product = new mongoose.Schema({
       {
         image: String,
         attribute: String,
-        detailSizeType: Array,
+        detailSizeType: {
+          type: [
+            {
+              sizeAndType: String,
+              quantity: Number,
+              price: Number,
+            },
+          ],
+        },
       },
     ],
     required: true,

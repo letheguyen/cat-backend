@@ -1,8 +1,8 @@
 const Categorys = require('../models/categorys')
-const Product = require('../models/product')
+const Products = require('../models/products')
 
 const { handleDeleteFile } = require('../utils')
-const { ERROR_CODE, STATUS_CATEGORY } = require('../constants')
+const { ERROR_CODE } = require('../constants')
 
 const createCategory = async (req, res) => {
   try {
@@ -119,12 +119,12 @@ const updateCategory = async (req, res) => {
       return res.status(400).json(ERROR_CODE.EXISTS)
     }
 
-    const newCategory = await Categorys.findByIdAndUpdate(
+    const isUpdateCategory = await Categorys.findByIdAndUpdate(
       req.params.id,
       req.body
     )
 
-    if (newCategory) {
+    if (isUpdateCategory && isUpdateProduct) {
       handleClearImage()
       return res.status(200).json(ERROR_CODE.CREATE_SUCCESS)
     }
@@ -146,6 +146,12 @@ const updateStatusCategory = async (req, res) => {
         $set: { status: req.body.status },
       }
     )
+
+    await Products.updateMany(
+      { category: req.params.id },
+      req.body
+    )
+
     return res.status(200).json(ERROR_CODE.UPDATE_SUCCESS)
   } catch (err) {
     return res.status(500).json({

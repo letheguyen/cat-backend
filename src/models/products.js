@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const { STATUS_CATEGORY } = require('../constants')
 
-const product = new mongoose.Schema({
+const products = new mongoose.Schema({
   category: { type: String, required: true },
   title: { type: String, required: true },
   description: { type: String, required: true },
@@ -31,8 +32,10 @@ const product = new mongoose.Schema({
       },
     ],
   },
+  likes: { type: Number, required: true, default: 0 },
+  status: { type: Number, required: true, default: STATUS_CATEGORY.start },
 })
 
-const Product = mongoose.model('product', product)
+const Products = mongoose.model('products', products)
 
-module.exports = Product
+module.exports = Products

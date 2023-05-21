@@ -1,4 +1,4 @@
-const Product = require('../models/product')
+const Products = require('../models/products')
 const Categorys = require('../models/categorys')
 
 const { handleDeleteFile } = require('../utils')
@@ -7,7 +7,7 @@ const { ERROR_CODE } = require('../constants')
 const createProduct = async (req, res) => {
   try {
     const dataBody = req.body
-    const dataProduct = await Product.create(dataBody)
+    const dataProduct = await Products.create(dataBody)
 
     if (!dataProduct) {
       dataBody?.images?.map((image) => {
@@ -37,10 +37,10 @@ const getProducts = async (req, res) => {
   try {
     const { page, limit } = req.query
     let product
-    const lengthCategory = await Product.find({}, { title: true })
+    const lengthCategory = await Products.find({}, { title: true })
 
     if (page && limit) {
-      product = await Product.find(
+      product = await Products.find(
         {},
         {
           __v: false,

@@ -8,7 +8,7 @@ const categorys = new mongoose.Schema({
   background: { type: String, required: true },
   attribute: { type: Array, required: false },
   productsCount: { type: Number, required: true, default: 0 },
-  status: { type: Number, required: false, default: STATUS_CATEGORY.category },
+  status: { type: Number, required: true, default: STATUS_CATEGORY.start },
 })
 
 const Categorys = mongoose.model('categorys', categorys)

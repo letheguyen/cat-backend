@@ -21,6 +21,7 @@ const APP_URL = {
   login: '/sign-in',
   signUp: '/sign-up',
   upload: '/upload',
+  signInSNS: '/sign-in-sns',
 }
 
 module.exports = {

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { DEFAULT_ROLE } = require('../constants')
+const { DEFAULT_ROLE, DEFAULT_FIELD } = require('../constants')
 
 const users = new mongoose.Schema({
   userName: { type: String, required: true },
@@ -14,6 +14,7 @@ const users = new mongoose.Schema({
   role: { type: String, required: true, default: DEFAULT_ROLE },
   avatar: { type: String, required: false },
   background: { type: String, required: false },
+  uid: { type: String, required: true ,default: DEFAULT_FIELD.uid},
 })
 
 const Users = mongoose.model('users', users)

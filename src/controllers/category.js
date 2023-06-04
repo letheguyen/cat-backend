@@ -82,7 +82,7 @@ const getCategoryDetail = async (req, res) => {
 const deleteCategory = async (req, res) => {
   try {
     const dataDelete = await Categorys.findByIdAndDelete(req.params.id)
-    await Product.deleteMany({ category: req.params.id })
+    await Products.deleteMany({ category: req.params.id })
 
     if (dataDelete.background) handleDeleteFile(dataDelete.background)
     if (dataDelete.avatar) handleDeleteFile(dataDelete.avatar)

@@ -49,7 +49,7 @@ const getProducts = async (req, res) => {
         .skip((Number(page) - 1) * Number(limit))
         .limit(limit)
     } else {
-      product = await Product.find()
+      product = await Products.find()
     }
 
     return res.status(200).json({

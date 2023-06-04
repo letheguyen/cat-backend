@@ -19,6 +19,24 @@ app.use(router)
 
 connectDb()
 
-app.listen(process.env.PORT, () =>
+// Chat
+const http = require('http')
+const server = http.createServer(app)
+
+const io = require('socket.io')(server, {
+  cors: {
+    origin: [process.env.URL_FRONT_END],
+  }
+});
+
+io.on('connection', (socket) => {
+  socket.on('CHAT', (message) => {
+    console.log('Received message:', message)
+    io.emit('CHAT', message)
+  })
+})
+
+
+server.listen(process.env.PORT, () =>
   console.log('On port http://localhost:' + process.env.PORT)
-) 
+)

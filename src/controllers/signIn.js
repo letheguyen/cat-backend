@@ -55,6 +55,7 @@ const signSNS = async (req, res) => {
 
     const handleRender = (dataUser) => {
       return {
+        _id: dataUser._id,
         userName:
           dataUser.userName === DEFAULT_FIELD.userName
             ? null

@@ -13,7 +13,7 @@ const app = express()
 app.use(cors())
 app.use('/public', express.static('public'))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: true })) 
 app.use(checkAuthorization)
 app.use(router)
 
@@ -33,6 +33,11 @@ io.on('connection', (socket) => {
   socket.on('CHAT', (message) => {
     console.log('Received message:', message)
     io.emit('CHAT', message)
+  })
+
+  socket.on('ACOUNT_ONELINE', (id) => {
+    console.log('One line:', id)
+    io.emit('ACOUNT_ONELINE', id)
   })
 })
 

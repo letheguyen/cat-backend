@@ -5,6 +5,7 @@ const URL_PUBLIC = {
 
 const URL_USER = {
   profile: '/profile',
+  getShopInfo: '/shop-info',
 }
 
 const URL_ADMIN = {
@@ -12,6 +13,7 @@ const URL_ADMIN = {
   product: '/product',
   categorys: '/categorys',
   categorysDetail: '/categorys/:id',
+  shopInformation: '/shop-infomation',
 }
 
 const APP_URL = {

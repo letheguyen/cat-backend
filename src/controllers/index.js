@@ -4,7 +4,7 @@ const SignUpController = require('./signUp')
 const uploadFile = require('./upload')
 const category = require('./category')
 const product = require('./product')
-
+const shopInformation = require('./shopInformation')
 
 module.exports = {
   ...usersController,
@@ -12,5 +12,6 @@ module.exports = {
   ...SignUpController,
   ...uploadFile,
   ...category,
-  ...product
+  ...product,
+  ...shopInformation
 }

@@ -15,7 +15,9 @@ const {
   createProduct,
   getProducts,
   updateStatusCategory,
-  signSNS
+  signSNS,
+  updateShopInformation,
+  getShopInformation
 } = require('../controllers')
 const { uploadSingle } = require('../utils')
 
@@ -23,6 +25,7 @@ const { uploadSingle } = require('../utils')
 router.post(APP_URL.login, SignIn)
 router.post(APP_URL.signUp, signUp)
 router.post(APP_URL.upload, uploadSingle, uploadFile)
+router.get(APP_URL.getShopInfo, getShopInformation)
 
 // Admin
 router.get(APP_URL.users, getUsers)
@@ -35,6 +38,9 @@ router.patch(APP_URL.categorysDetail, updateStatusCategory)
 router.post(APP_URL.product, createProduct)
 router.get(APP_URL.product, getProducts)
 router.post(APP_URL.signInSNS, signSNS)
+router.put(APP_URL.shopInformation, updateShopInformation)
+
+
 
 
 module.exports = router

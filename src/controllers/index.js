@@ -5,6 +5,8 @@ const uploadFile = require('./upload')
 const category = require('./category')
 const product = require('./product')
 const shopInformation = require('./shopInformation')
+const chat = require('./chat')
+
 
 module.exports = {
   ...usersController,
@@ -13,5 +15,6 @@ module.exports = {
   ...uploadFile,
   ...category,
   ...product,
-  ...shopInformation
+  ...shopInformation,
+  ...chat
 }

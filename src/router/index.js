@@ -17,7 +17,10 @@ const {
   updateStatusCategory,
   signSNS,
   updateShopInformation,
-  getShopInformation
+  getShopInformation,
+  createRoomChat,
+  getRoomChat,
+  getDetailRoomChat
 } = require('../controllers')
 const { uploadSingle } = require('../utils')
 
@@ -26,6 +29,12 @@ router.post(APP_URL.login, SignIn)
 router.post(APP_URL.signUp, signUp)
 router.post(APP_URL.upload, uploadSingle, uploadFile)
 router.get(APP_URL.getShopInfo, getShopInformation)
+
+// Users
+router.post(APP_URL.rommChat, createRoomChat)
+router.get(APP_URL.rommChat, getRoomChat)
+router.get(APP_URL.detailRommChat, getDetailRoomChat)
+
 
 // Admin
 router.get(APP_URL.users, getUsers)

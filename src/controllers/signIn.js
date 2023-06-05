@@ -18,6 +18,7 @@ const SignIn = async (req, res) => {
 
     if (userLogin) {
       const token = handleCreateToken({
+        _id: userLogin._id,
         userName: userLogin.userName,
         email: userLogin.email,
         role: userLogin.role,

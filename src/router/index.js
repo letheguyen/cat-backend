@@ -31,9 +31,9 @@ router.post(APP_URL.upload, uploadSingle, uploadFile)
 router.get(APP_URL.getShopInfo, getShopInformation)
 
 // Users
-router.post(APP_URL.rommChat, createRoomChat)
-router.get(APP_URL.rommChat, getRoomChat)
-router.get(APP_URL.detailRommChat, getDetailRoomChat)
+router.post(APP_URL.roomChat, createRoomChat)
+router.get(APP_URL.roomChat, getRoomChat)
+router.get(APP_URL.detailroomChat, getDetailRoomChat)
 
 
 // Admin

@@ -6,8 +6,8 @@ const URL_PUBLIC = {
 const URL_USER = {
   profile: '/profile',
   getShopInfo: '/shop-info',
-  rommChat: '/chat-room',
-  detailRommChat: '/chat-room/:id',
+  roomChat: '/chat-room',
+  detailroomChat: '/chat-room/:id',
 }
 
 const URL_ADMIN = {

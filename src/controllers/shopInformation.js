@@ -33,10 +33,7 @@ const updateShopInformation = async (req, res) => {
 const getShopInformation = async (req, res) => {
   try {
     const admin = await Users.findOne({ role: ADMIN_ROLE })
-    const dataInformation = await ShopInformation.find(
-      {},
-      { __v: false }
-    )
+    const dataInformation = await ShopInformation.find({})
     dataInformation[0]._id = admin._id
     return res.status(200).json(dataInformation)
   } catch (err) {

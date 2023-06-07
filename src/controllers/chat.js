@@ -34,7 +34,7 @@ const createRoomChat = async (req, res) => {
       to: user._id,
       idUserCreate: user._id,
       message: MESSAGE_WELCOME,
-      created: Date.now()
+      created: Date.now(),
     })
 
     return res.status(200).json(ERROR_CODE.CREATE_SUCCESS)
@@ -49,11 +49,10 @@ const createRoomChat = async (req, res) => {
 const getRoomChat = async (req, res) => {
   try {
     const { page, limit } = req.query
-    const data = verifyToken(req)
-
+    const data = verifyToken(req, undefined, undefined)
     const lengthRooms = await Rooms.find({})
 
-    if (data?.role === ADMIN_ROLE) {
+    if (data && data.role === ADMIN_ROLE) {
       const dataRoom = await Rooms.find({})
         .skip((Number(page) - 1) * Number(limit))
         .limit(limit)
@@ -68,12 +67,11 @@ const getRoomChat = async (req, res) => {
       })
     }
 
-    if (data?.role === DEFAULT_ROLE) {
-      const dataRoom = await Rooms.findOne({
-        userId: data?._id,
-      })
-      return res.status(200).json(dataRoom)
-    }
+    const dataRoom = await Rooms.findOne({
+      userId: data._id,
+    })
+    return res.status(200).json(dataRoom)
+
   } catch (err) {
     return res.status(500).json({
       message: err?.message,
@@ -91,7 +89,7 @@ const getDetailRoomChat = async (req, res) => {
     const dataChat = await Chat.find({
       idRoom: id,
     })
-      .sort({ created: - 1 })
+      .sort({ created: -1 })
       .skip((Number(page ? page : 1) - 1) * Number(limit))
       .limit(limit)
 

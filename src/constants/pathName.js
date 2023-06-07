@@ -1,11 +1,11 @@
 const URL_PUBLIC = {
   home: '/',
   home: '/home',
+  getShopInfo: '/shop-info',
 }
 
 const URL_USER = {
   profile: '/profile',
-  getShopInfo: '/shop-info',
   roomChat: '/chat-room',
   detailroomChat: '/chat-room/:id',
 }

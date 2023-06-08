@@ -20,7 +20,6 @@ const checkAuthorization = (req, res, next) => {
       message: 'Not have access',
     })
   }
-
   next()
 }
 

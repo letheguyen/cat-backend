@@ -14,7 +14,6 @@ const verifyToken = (req, role, originToken) => {
     if (role) {
       return decoded.role === role
     }
-    console.log(decoded)
     return decoded
   })
 }

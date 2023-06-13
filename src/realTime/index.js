@@ -62,6 +62,17 @@ const realTimeApp = (app) => {
         io.emit('ACCOUNT_ONLINE', users)
       }
     })
+
+    socket.on('disconnect', () => {
+      const account = verifyToken(socket?.handshake)
+      if (account?._id && users.includes(account._id)) {
+        const newUsers = users?.filter((user) => user !== account._id)
+        users = newUsers
+        io.emit('ACCOUNT_ONLINE', newUsers)
+      } else {
+        return
+      }
+    })
   })
 
   return server

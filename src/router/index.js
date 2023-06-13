@@ -20,7 +20,7 @@ const {
   getShopInformation,
   createRoomChat,
   getRoomChat,
-  getDetailRoomChat
+  getDetailRoomChat,
 } = require('../controllers')
 const { uploadSingle } = require('../utils')
 
@@ -35,7 +35,6 @@ router.post(APP_URL.roomChat, createRoomChat)
 router.get(APP_URL.roomChat, getRoomChat)
 router.get(APP_URL.detailroomChat, getDetailRoomChat)
 
-
 // Admin
 router.get(APP_URL.users, getUsers)
 router.get(APP_URL.categorys, getCategorys)
@@ -48,8 +47,5 @@ router.post(APP_URL.product, createProduct)
 router.get(APP_URL.product, getProducts)
 router.post(APP_URL.signInSNS, signSNS)
 router.put(APP_URL.shopInformation, updateShopInformation)
-
-
-
 
 module.exports = router

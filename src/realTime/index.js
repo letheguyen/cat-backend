@@ -1,5 +1,7 @@
 const http = require('http')
 const Chat = require('../models/chat')
+const Rooms = require('../models/rooms')
+
 
 const { CHAT } = require('../constants')
 const { saveChat } = require('../controllers')
@@ -36,7 +38,9 @@ const realTimeApp = (app) => {
       dataMessage.push(newChat)
 
       if (timmerId) clearTimeout(timmerId)
+
       io.emit(dataChat.idRoom, newChat)
+      io.emit("ADMIN_CHAT", newChat)
 
       timmerId = setTimeout(() => {
         handleSaveMessage()

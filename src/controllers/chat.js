@@ -54,13 +54,16 @@ const getRoomChat = async (req, res) => {
 
     if (data && data.role === ADMIN_ROLE) {
       const dataRoom = await Rooms.find({})
+        .sort({ timeSend: -1 })
         .skip((Number(page) - 1) * Number(limit))
         .limit(limit)
 
       return res.status(200).json({
         data: dataRoom,
         pagination: {
-          totalPage: lengthRooms.length,
+          totalPage: lengthRooms.length
+            ? Math.ceil(lengthRooms.length / limit)
+            : 0,
           limit: Number(limit),
           page: Number(page),
         },
@@ -71,7 +74,6 @@ const getRoomChat = async (req, res) => {
       userId: data._id,
     })
     return res.status(200).json(dataRoom)
-
   } catch (err) {
     return res.status(500).json({
       message: err?.message,
@@ -111,6 +113,13 @@ const getDetailRoomChat = async (req, res) => {
 
 const saveChat = async (data) => {
   try {
+    if (!data.length) return
+    const arrayIdRoom = data.map((chat) => chat.idRoom)
+    await Rooms.updateMany(
+      { _id: { $in: arrayIdRoom } },
+      { timeSend: Date.now() }
+    )
+
     return await Chat.insertMany(data)
   } catch (err) {
     return null
